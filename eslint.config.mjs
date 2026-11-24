@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // shadcn/ui components are generated vendor code (npx shadcn add); keep them as upstream ships them.
+    "components/ui/**",
   ]),
 ]);
 

@@ -1,26 +1,130 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+/*
+ * Design tokens (Tailwind v4 — this @theme block replaces tailwind.config.ts).
+ * Each token becomes a utility: --color-espresso → bg-espresso / text-espresso, etc.
+ * See CLAUDE.md for the full design system.
+ */
+@theme {
+  /* Palette: warm charcoal, rust, sand + white */
+  --color-espresso: #1e1d1a; /* warm charcoal: footer, hero base, body text */
+  --color-coffee: #78392b; /* rust: about band, accents */
+  --color-latte: #dfdbca; /* sand: announcement bar, visit panel */
+  --color-cream: #f5f6f1; /* bone white: page background, text on dark */
+  --color-paper: #ffffff; /* pure white: menu section */
+
+  /* Type */
+  --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-heading: var(--font-newsreader), ui-serif, Georgia, serif;
+
+  /* Shape & layout */
+  --radius-btn: 2px;
+  --container-page: 1920px;
+}
+
+/*
+ * shadcn/ui semantic tokens, mapped onto the café palette above.
+ * Components in components/ui read these (bg-primary, text-muted-foreground, border-border…).
+ * Light only: there is no dark theme.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f6f1; /* cream */
+  --foreground: #1e1d1a; /* espresso */
+  --card: #ffffff;
+  --card-foreground: #1e1d1a;
+  --popover: #f5f6f1;
+  --popover-foreground: #1e1d1a;
+  --primary: #1e1d1a;
+  --primary-foreground: #f5f6f1;
+  --secondary: #dfdbca; /* latte */
+  --secondary-foreground: #1e1d1a;
+  --muted: #dfdbca;
+  --muted-foreground: #5f5d4c; /* olive grey: secondary text on light */
+  --accent: #dfdbca;
+  --accent-foreground: #1e1d1a;
+  --destructive: #a3362a;
+  --border: rgb(30 29 26 / 0.15);
+  --input: rgb(30 29 26 / 0.3);
+  --ring: #1e1d1a;
+  --radius: 2px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  /* Everything stays square: every radius step resolves to 2px. */
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius);
+  --radius-2xl: var(--radius);
+  --radius-3xl: var(--radius);
+  --radius-4xl: var(--radius);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Serif display: upright light; <em> switches to italic for accent words. */
+.font-serif em {
+  font-style: italic;
+}
+
+/* Fade-up on scroll (toggled by <Reveal>). */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
