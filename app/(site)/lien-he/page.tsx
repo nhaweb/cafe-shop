@@ -26,7 +26,7 @@ export default function ContactPage() {
     <>
       <SiteNav active="lien-he" />
       <main>
-        <section className="bg-paper pb-20 md:pb-28">
+        <section className="bg-paper pb-14 md:pb-20">
           <PageIntro
             crumbs={[{ label: "Liên hệ" }]}
             title={
@@ -59,7 +59,7 @@ export default function ContactPage() {
 
         <VisitSection id="dia-chi" />
 
-        <section className="bg-cream py-20 md:py-28">
+        <section className="bg-paper py-14 md:py-20">
           <div className={`${gutter} grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-20`}>
             <Reveal>
               <p className={eyebrow}>Trước khi ghé</p>

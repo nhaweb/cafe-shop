@@ -71,7 +71,7 @@ export function ContactForm() {
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor="contact-topic">Chủ đề</FieldLabel>
               <Select name={field.name} value={field.value ?? ""} onValueChange={field.onChange}>
-                <SelectTrigger id="contact-topic" className="w-full bg-paper" aria-invalid={fieldState.invalid}>
+                <SelectTrigger id="contact-topic" className="w-full bg-transparent" aria-invalid={fieldState.invalid}>
                   <SelectValue placeholder="Chọn chủ đề" />
                 </SelectTrigger>
                 <SelectContent position="popper">

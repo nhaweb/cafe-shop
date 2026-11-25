@@ -39,11 +39,11 @@ export default async function BeansPage() {
             }
             lead="Những mẻ hạt quán dùng mỗi ngày, rang theo mẻ nhỏ và gửi đi trong 24 giờ. Chọn khối lượng và độ xay hợp với cách bạn pha."
           />
-          <ProductGrid products={beans} columns={4} className="pb-20 md:pb-28" />
+          <ProductGrid products={beans} columns={4} headingLevel="h2" className="pb-14 md:pb-20" />
         </div>
 
         {/* Promises strip */}
-        <section className="bg-latte">
+        <section className="bg-latte text-espresso">
           <div className={`${gutter} grid gap-0 py-14 md:grid-cols-3 md:py-16`}>
             {promises.map((p, i) => (
               <Reveal
@@ -59,11 +59,11 @@ export default async function BeansPage() {
         </section>
 
         {/* Brew guide: 50/50 photo + table */}
-        <section className="grid bg-cream md:grid-cols-2">
-          <div className="relative aspect-[4/5] md:aspect-auto md:min-h-[680px]">
+        <section className="grid bg-paper md:grid-cols-2">
+          <div className="relative aspect-[5/4] md:aspect-auto md:min-h-[560px]">
             <Image src={beansImg} alt="Hạt cà phê rang đổ ra từ bao bố" fill sizes="(min-width: 768px) 50vw, 100vw" placeholder="blur" className="object-cover" />
           </div>
-          <div className="flex items-center px-5 py-16 md:px-[10%] md:py-20">
+          <div className="flex items-center px-5 py-12 md:px-[10%] md:py-16">
             <Reveal className="w-full max-w-xl">
               <p className={eyebrow}>Hướng dẫn chọn hạt</p>
               <h2 className={`${serifDisplay} mt-4 text-[34px] md:text-[46px]`}>
@@ -87,7 +87,7 @@ export default async function BeansPage() {
           </div>
         </section>
 
-        <section className="bg-paper py-20 md:py-28">
+        <section className="border-t border-espresso/25 bg-paper py-14 md:py-20">
           <div className={`${gutter} grid gap-10 md:grid-cols-[1fr_1.4fr] md:gap-20`}>
             <Reveal>
               <p className={eyebrow}>Giao hàng & thanh toán</p>

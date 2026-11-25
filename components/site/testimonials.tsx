@@ -4,7 +4,7 @@ import { Reveal } from "./reveal";
 
 export function Testimonials() {
   return (
-    <section className="bg-cream py-20 md:py-28">
+    <section className="bg-cream py-14 md:py-20">
       <div className={gutter}>
         <Reveal>
           <p className={eyebrow}>Khách nói gì</p>

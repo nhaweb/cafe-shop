@@ -13,7 +13,7 @@ export default function CheckoutPage() {
   return (
     <>
       <SiteNav />
-      <main className="bg-cream pb-20 md:pb-28">
+      <main className="bg-paper pb-14 md:pb-20">
         <div className={`${gutter} pt-10 md:pt-14`}>
           <SiteBreadcrumb crumbs={[{ label: "Đặt hàng" }]} />
           <h1 className={`${pageTitle} mb-12 mt-10 md:mb-16 md:mt-14`}>

@@ -40,7 +40,7 @@ export function FitText({ text, max = 260, className = "" }: FitTextProps) {
     <div ref={wrapRef} className="w-full overflow-x-clip">
       <span
         ref={textRef}
-        className={`inline-block whitespace-nowrap text-[15vw] ${className}`}
+        className={`inline-block whitespace-nowrap text-4xl! ${className}`}
       >
         {text}
       </span>

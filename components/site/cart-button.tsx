@@ -16,7 +16,7 @@ export function CartButton() {
       onClick={() => setOpen(true)}
       aria-label={`Giỏ hàng, ${count} món`}
       className={cn(
-        "relative flex h-10 items-center gap-2 rounded-btn px-2.5 text-[15px] font-semibold transition-colors hover:bg-white/15",
+        "relative flex h-10 items-center gap-2 rounded-btn px-2.5 text-[13px] font-light uppercase tracking-[0.02em] transition-colors hover:bg-current/10",
         focusRing,
       )}
     >
@@ -25,8 +25,8 @@ export function CartButton() {
       <span
         aria-hidden
         className={cn(
-          "grid h-5 min-w-5 place-items-center bg-cream px-1 text-xs font-semibold text-espresso tabular-nums",
-          count === 0 && "bg-cream/25 text-cream",
+          "grid h-5 min-w-5 place-items-center bg-coffee px-1 text-xs font-semibold text-cream tabular-nums",
+          count === 0 && "bg-current/15 text-current",
         )}
       >
         {count}

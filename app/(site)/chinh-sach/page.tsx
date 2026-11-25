@@ -51,7 +51,7 @@ export default function PolicyPage() {
   return (
     <>
       <SiteNav />
-      <main className="bg-paper pb-20 md:pb-28">
+      <main className="bg-paper pb-14 md:pb-20">
         <PageIntro
           crumbs={[{ label: "Giao hàng & đổi trả" }]}
           title={

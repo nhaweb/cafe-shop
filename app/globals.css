@@ -2,22 +2,32 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* NB International Pro is a licensed font: drop NBInternationalPro-Regular.woff2 into public/fonts/. */
+@font-face {
+  font-family: "NB International Pro";
+  src:
+    local("NB International Pro"),
+    url("/fonts/NBInternationalPro-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
 /*
  * Design tokens (Tailwind v4 — this @theme block replaces tailwind.config.ts).
  * Each token becomes a utility: --color-espresso → bg-espresso / text-espresso, etc.
  * See CLAUDE.md for the full design system.
  */
 @theme {
-  /* Palette: warm charcoal, rust, sand + white */
-  --color-espresso: #1e1d1a; /* warm charcoal: footer, hero base, body text */
-  --color-coffee: #78392b; /* rust: about band, accents */
-  --color-latte: #dfdbca; /* sand: announcement bar, visit panel */
-  --color-cream: #f5f6f1; /* bone white: page background, text on dark */
-  --color-paper: #ffffff; /* pure white: menu section */
+  /* Palette: earthy wabi-sabi: ivory, sand, dark brown, terracotta */
+  --color-espresso: #2c221e; /* dark brown: body text, hero base, selected chips */
+  --color-coffee: #8c4a27; /* terracotta: buttons (accent) */
+  --color-latte: #eae2d6; /* warm sand: alternate section bands, nav, footer */
+  --color-cream: #faf8f5; /* ivory: page background, text on photos */
+  --color-paper: #ffffff; /* white: unused by sections */
 
   /* Type */
   --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-brand: "NB International Pro", "NB International", var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-newsreader), ui-serif, Georgia, serif;
 
   /* Shape & layout */
@@ -31,24 +41,24 @@
  * Light only: there is no dark theme.
  */
 :root {
-  --background: #f5f6f1; /* cream */
-  --foreground: #1e1d1a; /* espresso */
+  --background: #faf8f5; /* cream */
+  --foreground: #2c221e; /* espresso */
   --card: #ffffff;
-  --card-foreground: #1e1d1a;
-  --popover: #f5f6f1;
-  --popover-foreground: #1e1d1a;
-  --primary: #1e1d1a;
-  --primary-foreground: #f5f6f1;
-  --secondary: #dfdbca; /* latte */
-  --secondary-foreground: #1e1d1a;
-  --muted: #dfdbca;
-  --muted-foreground: #5f5d4c; /* olive grey: secondary text on light */
-  --accent: #dfdbca;
-  --accent-foreground: #1e1d1a;
+  --card-foreground: #2c221e;
+  --popover: #faf8f5;
+  --popover-foreground: #2c221e;
+  --primary: #2c221e;
+  --primary-foreground: #faf8f5;
+  --secondary: #eae2d6; /* latte */
+  --secondary-foreground: #2c221e;
+  --muted: #eae2d6;
+  --muted-foreground: #6a5d55; /* warm brown-grey: 4.5:1+ on ivory and sand */
+  --accent: #eae2d6;
+  --accent-foreground: #2c221e;
   --destructive: #a3362a;
-  --border: rgb(30 29 26 / 0.15);
-  --input: rgb(30 29 26 / 0.3);
-  --ring: #1e1d1a;
+  --border: rgb(44 34 30 / 0.15);
+  --input: rgb(44 34 30 / 0.3);
+  --ring: #2c221e;
   --radius: 2px;
 }
 
@@ -97,6 +107,22 @@
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
+  }
+  /* No one-word last lines in running text; balanced headings. */
+  p,
+  dd,
+  li,
+  blockquote {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  ::selection {
+    background: #8c4a27; /* coffee */
+    color: #faf8f5; /* cream */
   }
 }
 

@@ -18,14 +18,14 @@ export function MobileNav({ active }: { active?: NavKey }) {
       <SheetTrigger asChild>
         <button
           type="button"
-          className="h-10 rounded-btn px-2.5 text-sm font-semibold transition-colors hover:bg-white/15 md:hidden"
+          className="h-10 rounded-btn px-2.5 text-sm font-semibold transition-colors hover:bg-current/10 md:hidden"
         >
           Menu
         </button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-full gap-0 bg-espresso text-cream sm:max-w-sm [&_[data-slot=sheet-close]]:text-cream [&_[data-slot=sheet-close]]:hover:bg-white/10">
-        <SheetHeader className="h-20 justify-center border-b border-cream/20 px-5">
-          <SheetTitle className="font-serif text-2xl font-normal text-cream">{site.name}</SheetTitle>
+      <SheetContent side="right" className="w-full gap-0 bg-latte text-espresso sm:max-w-sm [&_[data-slot=sheet-close]]:text-espresso [&_[data-slot=sheet-close]]:hover:bg-espresso/10">
+        <SheetHeader className="h-20 justify-center border-b border-espresso/15 px-5">
+          <SheetTitle className="font-serif text-2xl font-normal text-espresso">{site.name}</SheetTitle>
           <SheetDescription className="sr-only">Điều hướng trang</SheetDescription>
         </SheetHeader>
 
@@ -50,20 +50,20 @@ export function MobileNav({ active }: { active?: NavKey }) {
         </ul>
 
         <div className="mt-auto px-5 pb-8">
-          <Separator className="bg-cream/20" />
-          <dl className="mt-6 space-y-1 text-sm text-cream/70">
+          <Separator className="bg-espresso/15" />
+          <dl className="mt-6 space-y-1 text-sm text-muted-foreground">
             <dt className="sr-only">Giờ mở cửa</dt>
             <dd>Mở cửa {site.hours}</dd>
             <dt className="sr-only">Địa chỉ</dt>
             <dd>{site.address}</dd>
           </dl>
           <div className="mt-6 grid grid-cols-2 gap-2">
-            <Button asChild variant="light">
+            <Button asChild>
               <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
                 Chỉ đường
               </a>
             </Button>
-            <Button asChild variant="outline-light">
+            <Button asChild variant="outline">
               <a href={`tel:${site.phone}`}>Gọi cho quán</a>
             </Button>
           </div>

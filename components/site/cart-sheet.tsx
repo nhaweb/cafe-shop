@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -24,6 +25,11 @@ export function CartSheet() {
   useEffect(() => {
     useCart.persist.rehydrate();
   }, []);
+
+  // A toast must never sit on top of the cart's checkout button.
+  useEffect(() => {
+    if (open) toast.dismiss();
+  }, [open]);
 
   const count = cartCount(items);
 
@@ -83,7 +89,7 @@ function CartLine({ item, onNavigate }: { item: CartItem; onNavigate: () => void
 
   return (
     <li className="flex gap-4 border-b border-border py-5 last:border-b-0">
-      <Link href={`/san-pham/${item.slug}`} onClick={onNavigate} className="relative aspect-[4/5] w-20 shrink-0 overflow-hidden bg-latte">
+      <Link href={`/san-pham/${item.slug}`} onClick={onNavigate} className="relative aspect-[4/5] w-20 shrink-0 overflow-hidden bg-espresso/10">
         <Image src={item.img} alt="" fill sizes="80px" className="object-cover" />
       </Link>
       <div className="flex min-w-0 flex-1 flex-col gap-1">

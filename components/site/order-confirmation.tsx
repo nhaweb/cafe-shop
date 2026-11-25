@@ -52,7 +52,7 @@ export function OrderConfirmation() {
         </div>
       </div>
 
-      <div className="bg-latte p-5 md:p-8">
+      <div className="border border-espresso/15 p-5 md:p-8">
         <h2 className="font-serif text-2xl font-light">Chi tiết đơn</h2>
         <dl className="mt-6 border-b border-espresso/15 text-[15px]">
           <div className="grid grid-cols-[120px_1fr] gap-4 border-t border-espresso/15 py-3">

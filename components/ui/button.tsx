@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         /** btnDark: on light backgrounds */
-        default: "bg-espresso text-cream hover:bg-coffee",
+        default: "bg-coffee text-cream hover:bg-espresso",
         /** btnLight: on dark backgrounds and photos */
         light: "bg-cream text-espresso hover:bg-white",
         /** btnOutline: secondary action on light backgrounds */

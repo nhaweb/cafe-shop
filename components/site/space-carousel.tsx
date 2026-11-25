@@ -11,10 +11,10 @@ export function SpaceCarousel({ photos, tone = "light" }: { photos: Photo[]; ton
     <Carousel opts={{ align: "start", loop: false }} className="w-full">
       <CarouselContent className="-ml-1">
         {photos.map((p) => (
-          <CarouselItem key={p.alt} className="basis-[82%] pl-1 md:basis-[38%]">
+          <CarouselItem key={p.alt} className="basis-[82%] pl-1 md:basis-[34%]">
             <figure>
-              <div className="relative aspect-[4/5] overflow-hidden bg-latte">
-                <Image src={p.img} alt={p.alt} fill sizes="(min-width: 768px) 38vw, 82vw" placeholder="blur" className="object-cover" />
+              <div className="relative aspect-[4/5] overflow-hidden bg-espresso/10 md:aspect-[4/3]">
+                <Image src={p.img} alt={p.alt} fill sizes="(min-width: 768px) 34vw, 82vw" placeholder="blur" className="object-cover" />
               </div>
               <figcaption className="mt-3 text-sm opacity-70">{p.caption}</figcaption>
             </figure>

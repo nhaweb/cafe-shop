@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { AddToCart } from "@/components/site/add-to-cart";
 import { SiteBreadcrumb } from "@/components/site/page-intro";
 import { ProductGrid } from "@/components/site/product-card";
@@ -21,7 +22,16 @@ export async function generateMetadata({ params }: PageProps<"/san-pham/[slug]">
   return { title: product.name, description: `${product.note}. ${product.description[0]}` };
 }
 
-export default async function ProductPage({ params }: PageProps<"/san-pham/[slug]">) {
+// partialPrefetching is on, so params are awaited inside <Suspense> (not at the top of the page).
+export default function ProductPage({ params }: PageProps<"/san-pham/[slug]">) {
+  return (
+    <Suspense fallback={<div className="min-h-svh bg-paper" aria-busy="true" />}>
+      <ProductContent params={params} />
+    </Suspense>
+  );
+}
+
+async function ProductContent({ params }: Pick<PageProps<"/san-pham/[slug]">, "params">) {
   const product = await getProduct((await params).slug);
   if (!product) notFound();
 
@@ -34,24 +44,27 @@ export default async function ProductPage({ params }: PageProps<"/san-pham/[slug
       <SiteNav active={isBean ? "ca-phe-hat" : "thuc-don"} />
       <main>
         <section className="grid bg-paper md:grid-cols-2">
-          <div className="relative aspect-[4/5] bg-latte md:sticky md:top-0 md:h-svh md:self-start md:aspect-auto">
-            <Image
-              src={product.img}
-              alt={product.alt}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              placeholder="blur"
-              loading="eager"
-              fetchPriority="high"
-              className="object-cover"
-            />
+          {/* Sticky wrapper only; the Image's parent must be `relative` (next/image fill). */}
+          <div className="bg-espresso/10 md:sticky md:top-0 md:h-svh md:self-start">
+            <div className="relative aspect-5/4 md:aspect-auto md:h-full">
+              <Image
+                src={product.img}
+                alt={product.alt}
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                placeholder="blur"
+                loading="eager"
+                fetchPriority="high"
+                className="object-cover"
+              />
+            </div>
           </div>
 
-          <div className="px-5 pb-20 pt-8 md:px-[10%] md:pb-28 md:pt-12">
+          <div className="px-5 pb-14 pt-8 md:px-[10%] md:pb-20 md:pt-12">
             <SiteBreadcrumb crumbs={[parent, { label: product.name }]} />
 
             <Reveal className="mt-10 md:mt-16">
-              {product.badge && <Badge className="mb-5 h-6 bg-latte px-2 text-xs font-semibold text-espresso">{product.badge}</Badge>}
+              {product.badge && <Badge className="mb-5 h-6 border border-espresso/30 bg-transparent px-2 text-xs font-semibold text-espresso">{product.badge}</Badge>}
               <h1 className={`${serifDisplay} text-[40px] italic md:text-[56px]`}>{product.name}</h1>
               <p className="mt-3 text-[15px] text-muted-foreground">{product.note}</p>
 
@@ -97,7 +110,7 @@ export default async function ProductPage({ params }: PageProps<"/san-pham/[slug
         </section>
 
         {related.length > 0 && (
-          <section className="bg-cream pb-20 pt-16 md:pb-28 md:pt-20">
+          <section className="border-t border-espresso/25 bg-paper pb-14 pt-12 md:pb-20 md:pt-14">
             <Reveal className={`${gutter} mb-8 md:mb-10`}>
               <h2 className={sectionTitle}>
                 Có thể bạn <em>cũng thích</em>

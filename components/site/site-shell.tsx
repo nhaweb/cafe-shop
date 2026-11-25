@@ -15,7 +15,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
       {children}
       <SiteFooter />
       <CartSheet />
-      <Toaster theme="light" position="bottom-center" />
+      <Toaster theme="light" position="top-center" />
     </>
   );
 }

@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 import { eyebrow, focusRing, linkUnderline, serifDisplay } from "@/lib/styles";
 import { Reveal } from "./reveal";
 
-/** 50/50 sand panel: photo left, address / hours / phone right. Used on Home and Liên hệ. */
+/** 50/50 panel: photo left, address / hours / phone right. Used on Home and Liên hệ. */
 export function VisitSection({ id = "ghe-quan", headingLevel = "h2" }: { id?: string; headingLevel?: "h1" | "h2" }) {
   const Heading = headingLevel;
   const details = [
@@ -16,8 +16,8 @@ export function VisitSection({ id = "ghe-quan", headingLevel = "h2" }: { id?: st
   ];
 
   return (
-    <section id={id} className="grid scroll-mt-4 bg-latte md:min-h-[720px] md:grid-cols-2">
-      <div className="relative aspect-[4/5] md:aspect-auto">
+    <section id={id} className="grid scroll-mt-4 border-t border-espresso/25 bg-cream md:min-h-[560px] md:grid-cols-2">
+      <div className="relative aspect-[5/4] md:aspect-auto">
         <Image
           src={gheQuanImg}
           alt="Barista đứng sau quầy, ly cà phê đá trên quầy"
@@ -28,7 +28,7 @@ export function VisitSection({ id = "ghe-quan", headingLevel = "h2" }: { id?: st
         />
       </div>
 
-      <div className="flex items-center px-5 py-16 md:px-[12%] md:py-20">
+      <div className="flex items-center px-5 py-12 md:px-[12%] md:py-16">
         <Reveal className="w-full max-w-lg">
           <p className={eyebrow}>Ghé quán</p>
           <Heading className={`${serifDisplay} mt-4 text-[34px] md:text-[46px]`}>

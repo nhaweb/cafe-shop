@@ -12,7 +12,7 @@ export default function OrderSuccessPage() {
   return (
     <>
       <SiteNav />
-      <main className="bg-cream py-16 md:py-24">
+      <main className="bg-paper py-16 md:py-24">
         <div className={gutter}>
           <OrderConfirmation />
         </div>

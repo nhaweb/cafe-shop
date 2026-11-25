@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -69,6 +71,10 @@ export function CheckoutForm() {
   });
   const method = useWatch({ control: form.control, name: "method" });
 
+  useEffect(() => {
+    toast.dismiss();
+  }, []);
+
   const total = cartTotal(items);
   const hasDrinks = items.some((i) => i.kind !== "bean");
 
@@ -94,9 +100,12 @@ export function CheckoutForm() {
 
   if (items.length === 0) {
     return (
-      <div className="flex min-h-[40vh] flex-col items-start justify-center gap-6">
+      <div className="flex flex-col items-start gap-6 pb-10">
         <p className={`${serifDisplay} text-[32px] md:text-[44px]`}>
           Giỏ hàng <em>đang trống.</em>
+        </p>
+        <p className="max-w-md text-[15px] text-muted-foreground">
+          Chọn một ly cà phê hoặc một túi hạt, rồi quay lại đây để hoàn tất đơn.
         </p>
         <div className="flex flex-wrap gap-2">
           <Button asChild>
@@ -150,7 +159,7 @@ export function CheckoutForm() {
             render={({ field }) => (
               <RadioGroup name={field.name} value={field.value} onValueChange={field.onChange} className="grid gap-2 md:grid-cols-2">
                 {methods.map((m) => (
-                  <FieldLabel key={m.value} htmlFor={`co-method-${m.value}`} className="bg-paper has-data-checked:border-espresso has-data-checked:bg-paper">
+                  <FieldLabel key={m.value} htmlFor={`co-method-${m.value}`} className="bg-transparent has-data-checked:border-espresso">
                     <Field orientation="horizontal">
                       <FieldContent>
                         <FieldTitle className="font-semibold">{m.title}</FieldTitle>
@@ -190,7 +199,7 @@ export function CheckoutForm() {
               <Field>
                 <FieldLabel htmlFor="co-time">{method === "pickup" ? "Thời gian đến lấy" : "Thời gian giao"}</FieldLabel>
                 <Select name={field.name} value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger id="co-time" className="w-full bg-paper md:w-72">
+                  <SelectTrigger id="co-time" className="w-full bg-transparent md:w-72">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent position="popper">
@@ -220,7 +229,7 @@ export function CheckoutForm() {
 
         <FieldSet>
           <FieldLegend className="font-serif text-2xl font-light">3. Thanh toán</FieldLegend>
-          <p className="border border-espresso/15 bg-paper p-4 text-[15px]">
+          <p className="border border-espresso/15 p-4 text-[15px]">
             <span className="font-semibold">Thanh toán khi nhận hàng.</span>{" "}
             <span className="text-muted-foreground">
               Tiền mặt cho người giao, hoặc trả tại quầy khi đến lấy. Quán sẽ gọi xác nhận đơn và báo phí giao (nếu có).
@@ -231,7 +240,7 @@ export function CheckoutForm() {
 
       {/* Order summary */}
       <aside className="md:sticky md:top-8 md:self-start">
-        <div className="bg-latte p-5 md:p-8">
+        <div className="border border-espresso/15 p-5 md:p-8">
           <h2 className="font-serif text-2xl font-light">Đơn của bạn</h2>
           <ul className="mt-6 border-t border-espresso/15">
             {items.map((i) => (

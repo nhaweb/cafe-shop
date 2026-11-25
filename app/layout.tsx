@@ -6,7 +6,7 @@ import "./globals.css";
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-be-vietnam",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
 });
 
 const newsreader = Newsreader({
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="vi" className={`${beVietnam.variable} ${newsreader.variable} antialiased`}>
+    <html lang="vi" data-scroll-behavior="smooth" className={`${beVietnam.variable} ${newsreader.variable} antialiased`}>
       <head>
         {/* Keep reveal content visible when JS is off. */}
         <noscript>

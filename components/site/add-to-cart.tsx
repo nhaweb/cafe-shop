@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -18,6 +18,17 @@ export function AddToCart({ product }: { product: Product }) {
 
   const unitPrice = priceWithOptions(product, selected);
 
+  // Mobile: a thumb-zone bar with price + CTA until the real CTA row scrolls into view.
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const [showBar, setShowBar] = useState(false);
+  useEffect(() => {
+    const el = ctaRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setShowBar(!e.isIntersecting && e.boundingClientRect.top > 0));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   function handleAdd() {
     add(
       {
@@ -30,7 +41,9 @@ export function AddToCart({ product }: { product: Product }) {
       },
       qty,
     );
+    toast.dismiss();
     toast.success(`Đã thêm ${qty} × ${product.name} vào giỏ`, {
+      duration: 3000,
       action: { label: "Xem giỏ", onClick: () => setOpen(true) },
     });
     setQty(1);
@@ -74,12 +87,23 @@ export function AddToCart({ product }: { product: Product }) {
             {formatPrice(unitPrice * qty)}
           </span>
         </div>
-        <div className="flex gap-2">
+        <div ref={ctaRef} className="flex gap-2">
           <QuantityStepper value={qty} onChange={setQty} />
           <Button size="lg" className="flex-1" onClick={handleAdd}>
             Thêm vào giỏ
           </Button>
         </div>
+      </div>
+
+      <div
+        aria-hidden={!showBar}
+        inert={!showBar}
+        className={`fixed inset-x-0 bottom-0 z-30 flex items-center gap-4 border-t border-espresso/15 bg-cream px-5 py-3 transition-transform duration-300 ease-out md:hidden motion-reduce:transition-none ${showBar ? "translate-y-0" : "translate-y-full"}`}
+      >
+        <span className="text-lg font-semibold tabular-nums">{formatPrice(unitPrice * qty)}</span>
+        <Button size="lg" className="flex-1" onClick={handleAdd}>
+          Thêm vào giỏ
+        </Button>
       </div>
     </div>
   );
